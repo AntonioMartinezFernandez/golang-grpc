@@ -1,0 +1,31 @@
+version: '3.9'
+
+services:
+  grpc-server:
+    container_name: grpc-server
+    restart: unless-stopped
+    build:
+      dockerfile: ./build/grpc-server/Dockerfile.dev
+      context: .
+    env_file:
+      - docker.env
+    environment:
+      - APP_SERVICE_NAME=grpc-server
+    ports:
+      - 50051:50051
+      - 80:80
+      - 443:443
+
+  grpc-client:
+    container_name: grpc-client
+    restart: unless-stopped
+    build:
+      dockerfile: ./build/grpc-client/Dockerfile.dev
+      context: .
+    env_file:
+      - docker.env
+    environment:
+      - APP_SERVICE_NAME=grpc-client
+    depends_on:
+      grpc-server:
+        condition: service_started

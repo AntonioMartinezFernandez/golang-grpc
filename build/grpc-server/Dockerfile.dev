@@ -1,0 +1,7 @@
+# Dev
+FROM golang:1.21 AS build
+ADD ../../. /grpc-server
+WORKDIR /grpc-server
+RUN curl -sSfL https://raw.githubusercontent.com/cosmtrek/air/master/install.sh | sh -s -- -b $(go env GOPATH)/bin
+EXPOSE 50051
+CMD ["air", "-c", "./grpc-server.air.toml"]
