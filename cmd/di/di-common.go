@@ -15,7 +15,7 @@ type CommonServices struct {
 
 func InitCommonServices() *CommonServices {
 	config := initConfig()
-	logger := pkg_logger.NewLogger(config)
+	logger := pkg_logger.NewLogger(config.LogLevel)
 
 	return &CommonServices{
 		Config: config,

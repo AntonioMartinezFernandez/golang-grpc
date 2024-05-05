@@ -4,13 +4,11 @@ import (
 	"os"
 
 	"log/slog"
-
-	"github.com/AntonioMartinezFernandez/golang-grpc/config"
 )
 
-func NewLogger(cfg config.Config) *slog.Logger {
+func NewLogger(level string) *slog.Logger {
 	var logLevel slog.Level
-	switch level := cfg.LogLevel; level {
+	switch level {
 	case "debug":
 		logLevel = slog.LevelDebug
 	case "info":
