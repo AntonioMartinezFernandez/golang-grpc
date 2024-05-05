@@ -1,0 +1,44 @@
+// Protocol Buffers Language Guide (proto3)
+//
+// https://protobuf.dev/programming-guides/proto3/
+
+syntax = "proto3";
+
+option go_package = "github.com/AntonioMartinezFernandez/golang-grpc/internal/user/infra/protobuffer";
+
+package user;
+
+// User definition
+message User {
+    string id = 1;
+    string name = 2;
+    int32 age = 3;
+    bool enabled = 4;
+}
+
+// The user service definition.
+service UserService {
+  // Get user by id
+  rpc GetUser (GetUserRequest) returns (GetUserResponse) {};
+
+  // Get all users
+  rpc GetAllUsers(GetAllUsersRequest) returns (GetAllUsersResponse) {};
+}
+
+// The request message containing the user's id.
+message GetUserRequest {
+  string id = 1;
+}
+
+// The response message containing the user info
+message GetUserResponse {
+  User user = 1;
+}
+
+// The request message empty
+message GetAllUsersRequest{}
+
+// The response message containing all users
+message GetAllUsersResponse {
+    repeated User users = 1;
+}
